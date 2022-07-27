@@ -63,7 +63,10 @@ public class MainActivity extends AppCompatActivity {
         btn_getWeatherById.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this,"You clicked button 2", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this,"You clicked button 2", Toast.LENGTH_SHORT).show();
+
+                // Modify the UI to have editText fields so that the user can insert the latitude and longitude of his/her choosing
+                weatherDataService.getWeatherForecastByCoordinates(139,35);
             }
         });
 
