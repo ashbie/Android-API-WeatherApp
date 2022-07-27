@@ -38,43 +38,25 @@ public class MainActivity extends AppCompatActivity {
         et_cityNameOrId = findViewById(R.id.et_enterData);
         lv_weatherReports = findViewById(R.id.lv_weatherReports);
 
+        final WeatherDataService weatherDataService = new WeatherDataService(MainActivity.this);
+
         // test if buttons work
         btn_getCityId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Instantiate the RequestQueue.
-                RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
-                String url = "https://api.openweathermap.org/geo/1.0/direct?q="+et_cityNameOrId.getText().toString()+"&limit=1&appid=9c6bac26decca18e2269735a51100eb2";
 
-                // Request a Json Array response from the provided URL.
-                JsonArrayRequest jaRequest = new JsonArrayRequest(Request.Method.GET, url,null,
-                        new Response.Listener<JSONArray>() {
-                            @Override
-                            public void onResponse(JSONArray response) {
-                                // show the json array using toast
-                                double longitude=0;
-                                double latitude=0;
-                                try {
-                                    JSONObject cityInfo = response.getJSONObject(0);
-                                    longitude = cityInfo.getDouble("lon");
-                                    latitude = cityInfo.getDouble("lat");
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-
-                                Toast.makeText(MainActivity.this,"Long. = "+longitude +"\n::Lat. = "+ latitude,Toast.LENGTH_SHORT).show();
-
-                            }
-                        }, new Response.ErrorListener() {
+                weatherDataService.getCityCoordinates(et_cityNameOrId.getText().toString(), new WeatherDataService.VolleyResponseListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(MainActivity.this,"There was an error!!!",Toast.LENGTH_SHORT).show();
+                    public void onError(String message) {
+                        Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onResponse(Double longi, Double lati) {
+                        Toast.makeText(MainActivity.this,"Long. = "+ longi +"\nLat. = "+ lati,Toast.LENGTH_SHORT).show();
                     }
                 });
-
-                // Add the request to the RequestQueue.
-                queue.add(jaRequest);
-                //Toast.makeText(MainActivity.this,"You clicked button 1", Toast.LENGTH_LONG).show();
+                //Toast.makeText(MainActivity.this, coordinates, Toast.LENGTH_LONG).show();
             }
         });
 
