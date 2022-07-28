@@ -14,6 +14,9 @@ public class WeatherReportModel {
     private String sys__country;
     private String name;
 
+    public WeatherReportModel() {
+    }
+
     public WeatherReportModel(int weather__id, String weather__main, String weather__description, float main__temp, float main__feels_like, float main__temp_min, float main__temp_max, int main__pressure, int main__humidity, float wind__speed, String sys__country, String name) {
         this.weather__id = weather__id;
         this.weather__main = weather__main;
@@ -123,5 +126,23 @@ public class WeatherReportModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "WeatherReportModel{" +
+                "weather__id=" + weather__id +
+                ", weather__main='" + weather__main + '\'' +
+                ", weather__description='" + weather__description + '\'' +
+                ", main__temp=" + main__temp +
+                ", main__feels_like=" + main__feels_like +
+                ", main__temp_min=" + main__temp_min +
+                ", main__temp_max=" + main__temp_max +
+                ", main__pressure=" + main__pressure +
+                ", main__humidity=" + main__humidity +
+                ", wind__speed=" + wind__speed +
+                ", sys__country='" + sys__country + '\'' +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

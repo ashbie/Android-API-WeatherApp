@@ -24,7 +24,7 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
     Button btn_getCityId, btn_getWeatherById, btn_getWeatherByCityName;
-    EditText et_cityNameOrId;
+    EditText et_cityNameOrId, et_cityNameSearch, et_longitude, et_latitude;
     ListView lv_weatherReports;
 
     @Override
@@ -36,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
         btn_getWeatherById = findViewById(R.id.bt_getWeatherByCityId);
         btn_getWeatherByCityName = findViewById(R.id.bt_getWeatherByCityName);
         et_cityNameOrId = findViewById(R.id.et_enterData);
+        et_cityNameSearch = findViewById(R.id.et_cityNameSearch);
+        et_longitude = findViewById(R.id.et_longitude);
+        et_latitude = findViewById(R.id.et_latitude);
         lv_weatherReports = findViewById(R.id.lv_weatherReports);
 
         final WeatherDataService weatherDataService = new WeatherDataService(MainActivity.this);
@@ -53,27 +56,40 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(Double longi, Double lati) {
-                        Toast.makeText(MainActivity.this,"Long. = "+ longi +"\nLat. = "+ lati,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this,"Long. = "+ longi +"\nLat. = "+ lati+"\nYou can now search the weather.\nLatitude and Longitude have been automatically set.",Toast.LENGTH_SHORT).show();
+                        et_latitude.setText(String.valueOf(lati));
+                        et_longitude.setText(String.valueOf(longi));
                     }
                 });
                 //Toast.makeText(MainActivity.this, coordinates, Toast.LENGTH_LONG).show();
             }
         });
 
+        // Get Weather By Long. & Lat.
         btn_getWeatherById.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Toast.makeText(MainActivity.this,"You clicked button 2", Toast.LENGTH_SHORT).show();
 
-                // Modify the UI to have editText fields so that the user can insert the latitude and longitude of his/her choosing
-                weatherDataService.getWeatherForecastByCoordinates(139,35);
+                // Modify this to send 9999 for the latitude and longitude if the user didn't enter anything
+                weatherDataService.getWeatherForecastByCoordinates(Double.parseDouble(et_longitude.getText().toString()), Double.parseDouble(et_latitude.getText().toString()), new WeatherDataService.ByLongAndLatResponseListener() {
+                    @Override
+                    public void onResponse(WeatherReportModel jsonResponseInJavaObject) {
+                        Toast.makeText(MainActivity.this,jsonResponseInJavaObject.toString(), Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onError(String message) {
+                        Toast.makeText(MainActivity.this,message, Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
 
         btn_getWeatherByCityName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this,"(LENGTH_LONG)You clicked button 3 and typed: "+et_cityNameOrId.getText().toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this,"(LENGTH_LONG)You clicked button 3 and typed: "+et_cityNameSearch.getText().toString(), Toast.LENGTH_LONG).show();
             }
         });
 
