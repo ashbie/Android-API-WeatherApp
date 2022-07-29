@@ -2,8 +2,10 @@ package kas.du.restapiandcallbackweatherapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -22,10 +24,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
     Button btn_getCityId, btn_getWeatherById, btn_getWeatherByCityName;
     EditText et_cityNameOrId, et_cityNameSearch, et_longitude, et_latitude;
     ListView lv_weatherReports;
+    ArrayAdapter arrayAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         et_longitude = findViewById(R.id.et_longitude);
         et_latitude = findViewById(R.id.et_latitude);
         lv_weatherReports = findViewById(R.id.lv_weatherReports);
+
 
         final WeatherDataService weatherDataService = new WeatherDataService(MainActivity.this);
 
@@ -74,8 +81,10 @@ public class MainActivity extends AppCompatActivity {
                 // Modify this to send 9999 for the latitude and longitude if the user didn't enter anything
                 weatherDataService.getWeatherForecastByCoordinates(Double.parseDouble(et_longitude.getText().toString()), Double.parseDouble(et_latitude.getText().toString()), new WeatherDataService.ByLongAndLatResponseListener() {
                     @Override
-                    public void onResponse(WeatherReportModel jsonResponseInJavaObject) {
-                        Toast.makeText(MainActivity.this,jsonResponseInJavaObject.toString(), Toast.LENGTH_LONG).show();
+                    public void onResponse(List<WeatherReportModel> jsonResponseInJavaObjectInList) {
+                        arrayAdapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, jsonResponseInJavaObjectInList);
+                        lv_weatherReports.setAdapter(arrayAdapter);
+                        //Toast.makeText(MainActivity.this,jsonResponseInJavaObject.toString(), Toast.LENGTH_LONG).show();
                     }
 
                     @Override
@@ -89,7 +98,19 @@ public class MainActivity extends AppCompatActivity {
         btn_getWeatherByCityName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this,"(LENGTH_LONG)You clicked button 3 and typed: "+et_cityNameSearch.getText().toString(), Toast.LENGTH_LONG).show();
+                weatherDataService.getWeatherForecastByCityName(et_cityNameSearch.getText().toString(), new WeatherDataService.WeatherByCityNameListener() {
+                    @Override
+                    public void onError(String message) {
+                        Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onResponse(List<WeatherReportModel> listContainingAWeatherReportModel) {
+                        arrayAdapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, listContainingAWeatherReportModel);
+                        lv_weatherReports.setAdapter(arrayAdapter);
+                        Toast.makeText(MainActivity.this, listContainingAWeatherReportModel.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 

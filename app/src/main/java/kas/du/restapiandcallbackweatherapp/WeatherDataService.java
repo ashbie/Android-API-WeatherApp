@@ -76,7 +76,7 @@ public class WeatherDataService {
     }
 
     public interface ByLongAndLatResponseListener {
-        void onResponse(WeatherReportModel jsonResponseInJavaObject);
+        void onResponse(List<WeatherReportModel> jsonResponseInJavaObjectInList);
 
         void onError(String message);
     }
@@ -115,7 +115,9 @@ public class WeatherDataService {
 
                     weatherReportModel.setName(response.getString("name"));
 
-                    byLongAndLatResponseListener.onResponse(weatherReportModel);
+                    weatherReportModelList.add(weatherReportModel);
+
+                    byLongAndLatResponseListener.onResponse(weatherReportModelList);
 
                     //using JSONObject & JSONArray is a bit tricky. I can't directy get something that a nested (e.g. 5 levels deep in a json object)
                     //I will have to define variables for each level in order to get the other nested levels
@@ -134,6 +136,38 @@ public class WeatherDataService {
 
         MySingleton.getInstance(contextMainActivity).addToRequestQueue(joRequest);
         // At the moment, I'm returning this thing below of type: List<WeatherReportModel> even though I am not using itreturn weatherReportModel;
+    }
+
+    public interface WeatherByCityNameListener{
+        void onError(String message);
+        void onResponse(List<WeatherReportModel> listContainingAWeatherReportModel);
+    }
+
+    public void getWeatherForecastByCityName(String cityName, WeatherByCityNameListener weatherByCityNameListener){
+        // Get it's coordinates(long. & lat.)
+            getCityCoordinates(cityName, new VolleyResponseListener() {
+                @Override
+                public void onError(String message) {
+                    Toast.makeText(contextMainActivity, message, Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onResponse(Double longi, Double lati) {
+                    // Get it's weather forecast
+                    getWeatherForecastByCoordinates(longi, lati, new ByLongAndLatResponseListener() {
+                        @Override
+                        public void onResponse(List<WeatherReportModel> jsonResponseInJavaObjectInList) {
+                            weatherByCityNameListener.onResponse(jsonResponseInJavaObjectInList);
+                        }
+
+                        @Override
+                        public void onError(String message) {
+                            weatherByCityNameListener.onError("An error was encountered while trying to process your request");
+                        }
+                    });
+                }
+            });
+
     }
 
 
