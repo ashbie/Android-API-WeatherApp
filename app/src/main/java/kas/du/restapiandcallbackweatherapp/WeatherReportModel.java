@@ -130,19 +130,11 @@ public class WeatherReportModel {
 
     @Override
     public String toString() {
-        return "WeatherReportModel{" +
-                "weather__id=" + weather__id +
-                ", weather__main='" + weather__main + '\'' +
-                ", weather__description='" + weather__description + '\'' +
-                ", main__temp=" + main__temp +
-                ", main__feels_like=" + main__feels_like +
-                ", main__temp_min=" + main__temp_min +
-                ", main__temp_max=" + main__temp_max +
-                ", main__pressure=" + main__pressure +
-                ", main__humidity=" + main__humidity +
-                ", wind__speed=" + wind__speed +
-                ", sys__country='" + sys__country + '\'' +
-                ", name='" + name + '\'' +
-                '}';
+        return  weather__main  +
+                "Details : " + weather__description + '\'' +
+                "Temp : " + main__temp +
+                "Feels Like : " + main__feels_like +
+                "Low : " + main__temp_min +
+                "High :" + main__temp_max ;
     }
 }

@@ -15,7 +15,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/*  This class has been created to carry out the exact functionality of the Buttons in the
+    << activity_main.xml >>  --- This code can also be written in << MainActivity.java >> but I
+    have done it this way so that << MainActivity.java >> should have less code hence making it
+    cleaner
+*/
 public class WeatherDataService {
 
     private static final String URL_PART1 = "https://api.openweathermap.org/geo/1.0/direct?q=";
@@ -117,9 +121,10 @@ public class WeatherDataService {
 
                     weatherReportModelList.add(weatherReportModel);
 
+                    /******************* Return **********************/
                     byLongAndLatResponseListener.onResponse(weatherReportModelList);
 
-                    //using JSONObject & JSONArray is a bit tricky. I can't directy get something that a nested (e.g. 5 levels deep in a json object)
+                    //using JSONObject & JSONArray is a bit tricky. I can't directy get something that is nested (e.g. 5 levels deep in a json object)
                     //I will have to define variables for each level in order to get the other nested levels
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -130,6 +135,8 @@ public class WeatherDataService {
             @Override
             public void onErrorResponse(VolleyError error) {
                 //Toast.makeText(contextMainActivity,"ERROR getting weather by latitude and longitude coordinates", Toast.LENGTH_LONG).show();
+
+                /******************* Return ******************************/
                 byLongAndLatResponseListener.onError("ERROR getting weather by latitude and longitude coordinates");
             }
         });

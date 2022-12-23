@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(List<WeatherReportModel> jsonResponseInJavaObjectInList) {
                         arrayAdapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, jsonResponseInJavaObjectInList);
                         lv_weatherReports.setAdapter(arrayAdapter);
-                        //Toast.makeText(MainActivity.this,jsonResponseInJavaObject.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this,jsonResponseInJavaObjectInList.toString(), Toast.LENGTH_LONG).show();
                     }
 
                     @Override

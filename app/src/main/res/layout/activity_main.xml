@@ -1,175 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="wrap_content" android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:fillViewport="true">
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context=".MainActivity">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
-        <Button
-            android:id="@+id/bt_getCityId"
-            android:layout_width="378dp"
-            android:layout_height="67dp"
-            android:layout_marginTop="24dp"
-            android:text="Get City Longitude &amp; Latitude"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_enterData" />
+    <Button
+        android:id="@+id/bt_getCityId"
+        android:layout_width="378dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="24dp"
+        android:text="Get City Longitude &amp; Latitude"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_enterData" />
 
-        <Button
-            android:id="@+id/bt_getWeatherByCityId"
-            android:layout_width="378dp"
-            android:layout_height="70dp"
-            android:layout_marginTop="20dp"
-            android:text="Get Weather by Long. &amp; Lat."
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_longitude" />
+    <Button
+        android:id="@+id/bt_getWeatherByCityId"
+        android:layout_width="378dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        android:text="Get Weather by Long. &amp; Lat."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_longitude" />
 
-        <Button
-            android:id="@+id/bt_getWeatherByCityName"
-            android:layout_width="169dp"
-            android:layout_height="68dp"
-            android:text="Get Weather by City Name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/et_cityNameSearch"
-            app:layout_constraintTop_toTopOf="@+id/et_cityNameSearch" />
+    <Button
+        android:id="@+id/bt_getWeatherByCityName"
+        android:layout_width="169dp"
+        android:layout_height="68dp"
+        android:text="Get Weather by City Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/et_cityNameSearch"
+        app:layout_constraintTop_toTopOf="@+id/et_cityNameSearch" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="493dp"
-            android:layout_height="43dp"
-            android:layout_marginTop="52dp"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="141dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="24dp"
 
-            android:gravity="center"
-            android:text="NOT RECOMMENDED!!!"
+        android:layout_marginTop="48dp"
 
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.616"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bt_getCityId" />
+        android:layout_marginEnd="18dp"
+        android:gravity="center"
+        android:text="NOT RECOMMENDED!!!"
+        app:layout_constraintEnd_toStartOf="@+id/lv_weatherReports"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bt_getCityId" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="489dp"
-            android:layout_height="44dp"
-            android:gravity="center"
-            android:text="Get a city's  Weather Forecast by entering it's name below :"
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="173dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
 
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.596"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+        android:text="Get a city's  Weather Forecast by entering it's name below :"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-        <TextView
-            android:id="@+id/tv_searchBy"
-            android:layout_width="488dp"
-            android:layout_height="39dp"
-            android:layout_marginTop="44dp"
-            android:gravity="center"
-            android:text="Get city coordinates by entering it's name below :"
+    <TextView
+        android:id="@+id/tv_searchBy"
+        android:layout_width="488dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="44dp"
+        android:gravity="center"
+        android:text="Get city coordinates by entering it's name below :"
 
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.484"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bt_getWeatherByCityId" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bt_getWeatherByCityId" />
 
-        <EditText
-            android:id="@+id/et_enterData"
-            android:layout_width="382dp"
-            android:layout_height="62dp"
-            android:layout_marginTop="20dp"
-            android:ems="10"
-            android:gravity="center"
-            android:hint="City Name"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_searchBy" />
+    <EditText
+        android:id="@+id/et_enterData"
+        android:layout_width="382dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="City Name"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_searchBy" />
 
-        <TextView
-            android:id="@+id/tv_orBy"
-            android:layout_width="493dp"
-            android:layout_height="51dp"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:paddingLeft="20sp"
-            android:paddingRight="20sp"
-            android:text="In order to get the Weather forecast of a city, enter its coordinates(Longitude and Latitude):"
+    <TextView
+        android:id="@+id/tv_orBy"
+        android:layout_width="493dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:paddingLeft="20sp"
+        android:paddingRight="20sp"
+        android:text="In order to get the Weather forecast of a city, enter its coordinates(Longitude and Latitude):"
 
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.487"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/et_longitude"
-            android:layout_width="153dp"
-            android:layout_height="57dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:ems="10"
-            android:gravity="center"
-            android:hint="Longitude"
-            android:inputType="number"
-            app:layout_constraintEnd_toStartOf="@+id/tv_and"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_orBy" />
+    <EditText
+        android:id="@+id/et_longitude"
+        android:layout_width="153dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Longitude"
+        android:inputType="number"
+        app:layout_constraintEnd_toStartOf="@+id/tv_and"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_orBy" />
 
-        <TextView
-            android:id="@+id/tv_and"
-            android:layout_width="37dp"
-            android:layout_height="42dp"
-            android:gravity="bottom|center"
-            android:text="and"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toStartOf="@+id/et_latitude"
-            app:layout_constraintStart_toEndOf="@+id/et_longitude"
-            app:layout_constraintTop_toTopOf="@+id/et_longitude" />
+    <TextView
+        android:id="@+id/tv_and"
+        android:layout_width="37dp"
+        android:layout_height="42dp"
+        android:gravity="bottom|center"
+        android:text="and"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@+id/et_latitude"
+        app:layout_constraintStart_toEndOf="@+id/et_longitude"
+        app:layout_constraintTop_toTopOf="@+id/et_longitude" />
 
-        <EditText
-            android:id="@+id/et_cityNameSearch"
-            android:layout_width="212dp"
-            android:layout_height="62dp"
-            android:layout_marginTop="28dp"
-            android:ems="10"
-            android:gravity="center"
-            android:hint="City Name"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toStartOf="@+id/bt_getWeatherByCityName"
-            app:layout_constraintHorizontal_bias="0.4"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+    <EditText
+        android:id="@+id/et_cityNameSearch"
+        android:layout_width="212dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="City Name"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/bt_getWeatherByCityName"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-        <EditText
-            android:id="@+id/et_latitude"
-            android:layout_width="178dp"
-            android:layout_height="55dp"
-            android:layout_marginEnd="8dp"
-            android:ems="10"
-            android:gravity="center"
-            android:hint="Latitude"
-            android:inputType="number"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tv_and"
-            app:layout_constraintTop_toTopOf="@+id/et_longitude" />
+    <EditText
+        android:id="@+id/et_latitude"
+        android:layout_width="178dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Latitude"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_and"
+        app:layout_constraintTop_toTopOf="@+id/et_longitude" />
 
-        <ListView
-            android:id="@+id/lv_weatherReports"
-            android:layout_width="439dp"
-            android:layout_height="113dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.375"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_cityNameSearch" />
+    <ListView
+        android:id="@+id/lv_weatherReports"
+        android:layout_width="228dp"
+        android:layout_height="112dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/textView" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
